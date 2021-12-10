@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 class BoxContainer extends StatelessWidget {
+  final Widget child;
+  BoxContainer({@required this.child});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,6 +18,7 @@ class BoxContainer extends StatelessWidget {
           BoxShadow(color: Colors.black12, spreadRadius: 1, blurRadius: 10),
         ],
       ),
+      child: this.child,
     );
   }
 }

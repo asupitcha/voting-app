@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:voting_app/modules/shared/box_container.dart';
+import 'package:voting_app/modules/vote/screen/vote_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF79491),
+      backgroundColor: Color(0xFFFBD1DB),
       appBar: AppBar(
         backgroundColor: Color(0xFFF6778B),
         title: Text(widget.title),
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: [
-            Expanded(child: BoxContainer()),
+            Expanded(child: VoteScreen()),
           ],
         ),
       ),
