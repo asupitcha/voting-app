@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:voting_app/modules/vote/screen/vote_screen.dart';
+import 'package:get/get.dart';
+import 'package:voting_app/modules/shared/meme_controller.dart';
+import 'package:voting_app/modules/shared/screen_controller.dart';
+import 'package:voting_app/modules/vote/screens/vote_screen.dart';
+import 'modules/results/screens/result_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,6 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final ScreenController screenController = Get.put(ScreenController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +43,35 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color(0xFFF6778B),
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SafeArea(
         child: Column(
           children: [
-            Expanded(child: VoteScreen()),
+            Expanded(
+              child: Obx(() {
+                if (screenController.isEnd.value) {
+                  return ResultScreen();
+                }
+                return VoteScreen();
+              }),
+            ),
+            Obx(() {
+              if (screenController.isEnd.value) {
+                return GestureDetector(
+                  onTap: () {
+                    screenController.isEnd(false);
+                    Get.delete<MemeController>();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.replay),
+                      Text('Restart'),
+                    ],
+                  ),
+                );
+              }
+              return SizedBox();
+            })
           ],
         ),
       ),
